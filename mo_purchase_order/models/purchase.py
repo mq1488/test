@@ -243,6 +243,7 @@ class procurement_order(models.Model):
                             'fiscal_position': partner.property_account_position and partner.property_account_position.id or False,
                             'payment_term_id': partner.property_supplier_payment_term.id or False,
                             'dest_address_id': procurement.partner_dest_id.id,
+                            'is_discount': False
                         }
                         po_id = self.create_procurement_purchase_order(cr, SUPERUSER_ID, procurement, po_vals,
                                                                        line_vals, context=context)
@@ -337,6 +338,7 @@ class procurement_order(models.Model):
                             'fiscal_position': partner.property_account_position and partner.property_account_position.id or False,
                             'payment_term_id': partner.property_supplier_payment_term.id or False,
                             'dest_address_id': procurement.partner_dest_id.id,
+                            'is_discount': False
                         }
                         po_id = self.create_procurement_purchase_order(cr, SUPERUSER_ID, procurement, po_vals,
                                                                        line_vals, context=context)
