@@ -26,7 +26,7 @@ class procurement_order(models.Model):
             engraved_word = False
             three_pendants_option = False
             proc_id = procurement.id
-            sale_line_id = self.pool.get('procurement.order').browse(cr, uid, proc_id, context=context).sale_line_id.id
+            sale_line_id = self.pool.get('procurement.order').browse(cr, uid, proc_id - 1, context=context).sale_line_id.id
             group_id = procurement.group_id.id
             product_id = procurement.product_id.id
             order_name = str(procurement.origin).split(':')[0]
