@@ -68,10 +68,18 @@ class procurement_order(models.Model):
                 schedule_date = self._get_purchase_schedule_date(cr, uid, procurement, company, context=context)
                 purchase_date = self._get_purchase_order_date(cr, uid, procurement, company, schedule_date,
                                                               context=context)
-                _logger.info('Discount: %s',
+                _logger.warning('Discount: %s',
                              procurement.sale_line_id.discount)
-                _logger.info('Procurement: %s',
+                _logger.warning('Procurement: %s',
                              procurement)
+                _logger.debug('Discount: %s',
+                                procurement.sale_line_id.discount)
+                _logger.debug('Procurement: %s',
+                                procurement)
+                _logger.error('Discount: %s',
+                                procurement.sale_line_id.discount)
+                _logger.error('Procurement: %s',
+                                procurement)
                 if procurement.sale_line_id.discount >= 100:
                     line_vals = self._get_po_line_values_from_proc(cr, uid, procurement, partner, company,
                                                                    schedule_date, context=ctx_company)
