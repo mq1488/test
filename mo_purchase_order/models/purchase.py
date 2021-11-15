@@ -26,6 +26,7 @@ class procurement_order(models.Model):
             engraved_word = False
             three_pendants_option = False
             proc_id = procurement.id
+            sale_line_id_test = self.pool.get('procurement.order').browse(cr, uid, proc_id - 1, context=context)
             sale_line_id = self.pool.get('procurement.order').browse(cr, uid, proc_id - 1, context=context).sale_line_id.id
             group_id = procurement.group_id.id
             product_id = procurement.product_id.id
@@ -68,19 +69,10 @@ class procurement_order(models.Model):
                 schedule_date = self._get_purchase_schedule_date(cr, uid, procurement, company, context=context)
                 purchase_date = self._get_purchase_order_date(cr, uid, procurement, company, schedule_date,
                                                               context=context)
-                _logger.warning('Discount: %s',
-                             procurement.sale_line_id.discount)
-                _logger.warning('Procurement: %s',
-                             procurement)
-                _logger.debug('Discount: %s',
-                                procurement.sale_line_id.discount)
-                _logger.debug('Procurement: %s',
-                                procurement)
-                _logger.error('Discount: %s',
-                                procurement.sale_line_id.discount)
-                _logger.error('Procurement: %s',
-                                procurement)
-                if procurement.sale_line_id.discount >= 100:
+                _logger.info('Sale line: %s %s %s',
+                             sale_line_id_test.id,sale_line_id_test.order_id.id, sale_line_id_test.discount)
+
+                if procurement.sale_line_id.discount >= 50:
                     line_vals = self._get_po_line_values_from_proc(cr, uid, procurement, partner, company,
                                                                    schedule_date, context=ctx_company)
                     # look for any other draft PO for the same supplier, to attach the new line on instead of creating a new draft one
