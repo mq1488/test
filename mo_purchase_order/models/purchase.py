@@ -69,10 +69,7 @@ class procurement_order(models.Model):
                 schedule_date = self._get_purchase_schedule_date(cr, uid, procurement, company, context=context)
                 purchase_date = self._get_purchase_order_date(cr, uid, procurement, company, schedule_date,
                                                               context=context)
-                _logger.info('Sale line: %s %s %s',
-                             sale_line_id_test.id,sale_line_id_test.order_id.id, sale_line_id_test.discount)
-
-                if procurement.sale_line_id.discount >= 50:
+                if sale_line_id_test.discount >= 30 or sale_line_id_test.discount < 50:
                     line_vals = self._get_po_line_values_from_proc(cr, uid, procurement, partner, company,
                                                                    schedule_date, context=ctx_company)
                     # look for any other draft PO for the same supplier, to attach the new line on instead of creating a new draft one
