@@ -76,7 +76,8 @@ class procurement_order(models.Model):
                 if sale_line_id_test.discount >= 30 and sale_line_id_test.discount < 50:
                     line_vals = self._get_po_line_values_from_proc(cr, uid, procurement, partner, company,
                                                                    schedule_date, context=ctx_company)
-                    line_vals['schedule_date'] = line_vals['schedule_date'] + dt.timedelta(days=30)
+                    # line_vals['schedule_date'] = line_vals['schedule_date'] + dt.timedelta(days=30)
+                    _logger.info(line_vals)
                     # look for any other draft PO for the same supplier, to attach the new line on instead of creating a new draft one
                     date_start = '{} 00:00:01'.format(datetime.now().date())
                     date_end = '{} 23:59:59'.format(datetime.now().date())
@@ -239,7 +240,7 @@ class procurement_order(models.Model):
                     #             name = stein_desc
                     #             po_line_obj.write(cr, SUPERUSER_ID, po_line.id, {'name': name}, context=context)
                     #         linked_po_ids.append(procurement.id)
-                    
+
                     name = seq_obj.get(cr, uid, 'purchase.order') or _('PO: %s') % procurement.name
                     po_vals = {
                         'name': name,
