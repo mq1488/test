@@ -199,7 +199,7 @@ class procurement_order(models.Model):
                                     available += 1
                             if available != 0:
                                 po_draft = po_id
-                    if po_draft != 0 and partner.name != 'Merkle':
+                    if po_draft != 0:
                         po_id = po_draft
                         po_rec = po_obj.browse(cr, uid, po_id, context=context)
                         po_to_update = {}
