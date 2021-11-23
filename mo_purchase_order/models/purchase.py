@@ -76,7 +76,7 @@ class procurement_order(models.Model):
                 if sale_line_id_test.discount >= 30 and sale_line_id_test.discount < 50:
                     line_vals = self._get_po_line_values_from_proc(cr, uid, procurement, partner, company,
                                                                    schedule_date, context=ctx_company)
-                    line_vals['date_planned'] = str(datetime.strptime(line_vals['date_planned'], "%Y-%m-%d %H:%M:%S") + dt.timedelta(days=30))
+                    line_vals['date_planned'] = str(datetime.strptime(line_vals['date_planned'], "%Y-%m-%d %H:%M:%S") + dt.timedelta(days=24))
                     # look for any other draft PO for the same supplier, to attach the new line on instead of creating a new draft one
                     date_start = '{} 00:00:01'.format(datetime.now().date())
                     date_end = '{} 23:59:59'.format(datetime.now().date())
@@ -102,7 +102,7 @@ class procurement_order(models.Model):
                                     available += 1
                             if available != 0:
                                 po_draft = po_id
-                    if po_draft != 0 and partner.name != 'Merkle':
+                    if po_draft != 0:
                         po_id = po_draft
                         po_rec = po_obj.browse(cr, uid, po_id, context=context)
                         po_to_update = {}
