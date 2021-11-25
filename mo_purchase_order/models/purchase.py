@@ -73,7 +73,7 @@ class procurement_order(models.Model):
                 purchase_date = self._get_purchase_order_date(cr, uid, procurement, company, schedule_date,
                                                               context=context)
 
-                if sale_line_id_test.discount >= 30 and sale_line_id_test.discount < 50:
+                if sale_line_id_test.discount >= 20 and sale_line_id_test.discount < 50:
                     line_vals = self._get_po_line_values_from_proc(cr, uid, procurement, partner, company,
                                                                    schedule_date, context=ctx_company)
                     line_vals['date_planned'] = str(datetime.strptime(line_vals['date_planned'], "%Y-%m-%d %H:%M:%S") + dt.timedelta(days=24))
