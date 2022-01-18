@@ -53,10 +53,9 @@ class procurement_order(models.Model):
                 stein = True
                 stein_desc = procurement_name
             if 'Engraving' in procurement_name:
-                mark_1 = procurement_name.find("Engraving: ")
-                rest_name = procurement_name[mark_1 + 11:]
-                mark_2 = rest_name.find(" ||")
-                engraved_word = rest_name[:mark_2]
+                mark_1 = procurement_name.find("Gravur: ")
+                rest_name = procurement_name[mark_1:]
+                engraved_word = rest_name
             if 'Three pendants' in procurement_name:
                 mark_1 = procurement_name.find("Three pendants: ")
                 rest_name = procurement_name[mark_1 + 16:]
